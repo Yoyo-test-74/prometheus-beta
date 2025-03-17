@@ -3,6 +3,7 @@ def count_unique_paths(m: int, n: int) -> int:
     Count the number of unique paths from top-left to bottom-right in an m x n grid.
     
     Only allowed movements are moving right or down.
+    Uses dynamic programming with optimized compute.
     
     Args:
         m (int): Number of rows in the grid
@@ -24,12 +25,15 @@ def count_unique_paths(m: int, n: int) -> int:
     if m < 1 or n < 1:
         raise ValueError("Grid dimensions must be at least 1x1")
     
-    # Create a 2D grid to store unique path counts
-    dp = [[1] * n for _ in range(m)]
+    # Optimized approach for combinatorics
+    # Total unique paths is (m+n-2) choose (m-1)
+    # Uses math and factorials instead of dynamic programming
+    def factorial(x):
+        if x <= 1:
+            return 1
+        return x * factorial(x - 1)
     
-    # Calculate unique paths using dynamic programming
-    for i in range(1, m):
-        for j in range(1, n):
-            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    def combination(n, k):
+        return factorial(n) // (factorial(k) * factorial(n - k))
     
-    return dp[m-1][n-1]
+    return combination(m + n - 2, m - 1)
