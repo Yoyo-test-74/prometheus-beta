@@ -1,9 +1,11 @@
+from math import comb
+
 def count_unique_paths(m: int, n: int) -> int:
     """
     Count the number of unique paths from top-left to bottom-right in an m x n grid.
     
     Only allowed movements are moving right or down.
-    Uses dynamic programming with optimized compute.
+    Uses combinatorics for precise path counting.
     
     Args:
         m (int): Number of rows in the grid
@@ -25,15 +27,5 @@ def count_unique_paths(m: int, n: int) -> int:
     if m < 1 or n < 1:
         raise ValueError("Grid dimensions must be at least 1x1")
     
-    # Optimized approach for combinatorics
-    # Total unique paths is (m+n-2) choose (m-1)
-    # Uses math and factorials instead of dynamic programming
-    def factorial(x):
-        if x <= 1:
-            return 1
-        return x * factorial(x - 1)
-    
-    def combination(n, k):
-        return factorial(n) // (factorial(k) * factorial(n - k))
-    
-    return combination(m + n - 2, m - 1)
+    # Compute unique paths using combination
+    return comb(m + n - 2, m - 1)
