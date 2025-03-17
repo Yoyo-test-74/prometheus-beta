@@ -14,11 +14,11 @@ def test_single_dimension_grids():
 def test_square_grids():
     """Test square grids"""
     assert count_unique_paths(2, 2) == 2
-    assert count_unique_paths(4, 4) == 70
+    assert count_unique_paths(4, 4) == 20
 
 def test_large_grid():
     """Test a relatively large grid"""
-    assert count_unique_paths(10, 10) > 48620
+    assert count_unique_paths(10, 10) == 48620
 
 def test_invalid_grid_dimensions():
     """Test error handling for invalid grid dimensions"""
