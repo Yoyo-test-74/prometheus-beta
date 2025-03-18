@@ -31,8 +31,8 @@ def find_middle_range_indices(sorted_list, range_size):
     
     # Calculate middle index for both even and odd length lists
     if list_length % 2 == 0:
-        # For even length, use the lower of the two middle indices
-        middle_index = (list_length // 2) - 1
+        # For even length, use the upper of the two middle indices
+        middle_index = list_length // 2
     else:
         # For odd length, use the exact middle index
         middle_index = list_length // 2
