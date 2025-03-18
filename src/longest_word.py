@@ -26,5 +26,10 @@ def find_longest_word(sentence):
     if not words:
         raise ValueError("Input sentence contains no valid words")
     
-    # Find the first longest word using stable sorting
-    return sorted(words, key=len, reverse=True)[0]
+    # Get max length
+    max_length = len(max(words, key=len))
+    
+    # Return the first word of max length
+    for word in words:
+        if len(word) == max_length:
+            return word
