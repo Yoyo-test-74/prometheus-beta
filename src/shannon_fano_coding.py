@@ -19,6 +19,10 @@ def shannon_fano_encode(data: str) -> Tuple[Dict[str, str], str]:
     if not data:
         raise ValueError("Input data cannot be empty")
     
+    # Special case for single character
+    if len(set(data)) == 1:
+        return {data[0]: '0'}, '0' * len(data)
+    
     # Calculate character frequencies
     freq = {}
     for char in data:
@@ -76,6 +80,11 @@ def shannon_fano_decode(code_map: Dict[str, str], encoded: str) -> str:
     Raises:
         ValueError: If encoded string cannot be decoded
     """
+    # Special case for single character encoding
+    if len(code_map) == 1:
+        char = list(code_map.keys())[0]
+        return char * (len(encoded) // len(code_map[char]))
+    
     # Create reverse mapping
     reverse_map = {code: char for char, code in code_map.items()}
     
