@@ -32,10 +32,13 @@ def convert_to_header_case(input_string: str) -> str:
         if char.isalpha():
             cleaned_chars.append(char)
         elif char.isdigit():
-            # Keep digits attached to words
-            if (i > 0 and input_string[i-1].isalpha()) or \
-               (i < len(input_string) - 1 and input_string[i+1].isalpha()):
-                cleaned_chars.append(char)
+            # Add space before/after specific numbered sections
+            if (i > 0 and input_string[i-1].isalpha() and 
+                (i == len(input_string) - 1 or input_string[i+1].isalpha())):
+                cleaned_chars.append(' ' + char)
+            elif (i < len(input_string) - 1 and input_string[i+1].isalpha() and 
+                  (i == 0 or input_string[i-1].isalpha())):
+                cleaned_chars.append(char + ' ')
             else:
                 cleaned_chars.append(char)
         else:
