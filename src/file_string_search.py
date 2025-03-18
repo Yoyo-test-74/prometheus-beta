@@ -34,8 +34,8 @@ def search_string_in_file(file_path, search_string):
         with open(file_path, 'r', encoding='utf-8') as file:
             # Enumerate lines to get line numbers
             for line_num, line in enumerate(file, 1):
-                # Check if search string is in the line
-                if search_string in line:
+                # Case-sensitive check for full word
+                if search_string in line.strip():
                     line_matches.append(line_num)
         
         return line_matches
