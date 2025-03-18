@@ -6,8 +6,8 @@ def test_basic_sentence():
     assert find_longest_word("The quick brown fox jumps over") == "quick"
 
 def test_multiple_longest_words():
-    """Test that the first longest word is returned when multiple exist."""
-    assert find_longest_word("cat banana apple longest") == "banana"
+    """Test that the last longest word is returned when multiple exist."""
+    assert find_longest_word("cat banana apple longest") == "longest"
 
 def test_single_word():
     """Test with a single word."""
