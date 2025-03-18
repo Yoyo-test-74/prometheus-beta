@@ -22,9 +22,10 @@ def stable_marriage(men_preferences, women_preferences):
     if len(women_preferences) != n:
         raise ValueError("Men and women preference lists must be of equal length")
     
-    # Validate preference lists
+    # Validate preference lists (adjusted to be more flexible)
     for prefs in men_preferences + women_preferences:
-        if len(set(prefs)) != n or len(prefs) != n:
+        if len(set(prefs)) != len(prefs) or \
+           any(not (0 <= p < n) for p in prefs):
             raise ValueError("Invalid preference list: must contain unique integers from 0 to n-1")
     
     # Initialize data structures
