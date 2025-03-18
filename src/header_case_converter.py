@@ -26,26 +26,20 @@ def convert_to_header_case(input_string: str) -> str:
     if not isinstance(input_string, str):
         raise TypeError("Input must be a string")
     
-    # Replace non-alphanumeric characters with spaces
-    cleaned_chars = []
-    for i, char in enumerate(input_string):
-        if char.isalpha():
-            cleaned_chars.append(char)
-        elif char.isdigit():
-            # Add space before/after specific numbered sections
-            if (i > 0 and input_string[i-1].isalpha() and 
-                (i == len(input_string) - 1 or input_string[i+1].isalpha())):
-                cleaned_chars.append(' ' + char)
-            elif (i < len(input_string) - 1 and input_string[i+1].isalpha() and 
-                  (i == 0 or input_string[i-1].isalpha())):
-                cleaned_chars.append(char + ' ')
-            else:
-                cleaned_chars.append(char)
+    # Split the string into words based on non-alphanumeric characters
+    words = []
+    current_word = []
+    for char in input_string:
+        if char.isalnum():
+            current_word.append(char)
         else:
-            cleaned_chars.append(' ')
+            if current_word:
+                words.append(''.join(current_word))
+                current_word = []
     
-    # Convert to string and split
-    cleaned_string = ''.join(cleaned_chars)
+    # Add the last word if not empty
+    if current_word:
+        words.append(''.join(current_word))
     
-    # Split the string, convert to title case, and join
-    return ' '.join(word.capitalize() for word in cleaned_string.split())
+    # Capitalize each word
+    return ' '.join(word.capitalize() for word in words)
