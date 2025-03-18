@@ -17,14 +17,17 @@ def search_sorted_matrix(matrix, target):
         ValueError: If matrix is empty or contains non-integer elements
     """
     # Input validation
-    if not isinstance(matrix, list) or not matrix:
-        return False
-    
-    if not all(isinstance(row, list) for row in matrix):
+    if not isinstance(matrix, list):
         raise TypeError("Matrix must be a list of lists")
+    
+    if not matrix:
+        return False
     
     if not isinstance(target, int):
         raise TypeError("Target must be an integer")
+    
+    if not all(isinstance(row, list) for row in matrix):
+        raise TypeError("Matrix must be a list of lists")
     
     # Check if matrix is empty or contains empty rows
     if not matrix[0]:
