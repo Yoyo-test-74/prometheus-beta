@@ -19,14 +19,10 @@ def find_longest_word(sentence):
     if not isinstance(sentence, str):
         raise TypeError("Input must be a string")
     
-    # Check for empty string
-    if len(sentence.strip()) == 0:
-        raise ValueError("Input sentence cannot be empty")
-    
     # Use regex to split words, supporting Unicode characters
     words = re.findall(r'\b[a-zA-Zà-ÿÀ-Ÿ]+\b', sentence)
     
-    # If no words after splitting, raise ValueError
+    # If no words after splitting, raise specific error
     if not words:
         raise ValueError("Input sentence contains no valid words")
     
