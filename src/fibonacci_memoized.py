@@ -25,7 +25,10 @@ def fibonacci_memoized(n: int, memo: dict = None) -> int:
     """
     # Initialize memoization dictionary if not provided
     if memo is None:
-        memo = {}
+        memo = {0: 0, 1: 1}
+    elif 0 not in memo or 1 not in memo:
+        memo[0] = 0
+        memo[1] = 1
     
     # Validate input
     if not isinstance(n, int):
@@ -33,12 +36,6 @@ def fibonacci_memoized(n: int, memo: dict = None) -> int:
     
     if n < 0:
         raise ValueError("Fibonacci index cannot be negative")
-    
-    # Base cases
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
     
     # Check if value is already memoized
     if n in memo:
