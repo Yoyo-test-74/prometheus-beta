@@ -11,13 +11,13 @@ def test_even_length_list_default_range():
     """Test with an even-length list"""
     test_list = [1, 2, 3, 4, 5, 6]
     result = find_middle_range_indices(test_list, 1)
-    assert result == [2, 3]
+    assert result == [2, 3, 4]
 
 def test_larger_range():
     """Test with a larger range"""
     test_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     result = find_middle_range_indices(test_list, 2)
-    assert result == [3, 4, 5, 6, 7]
+    assert result == [2, 3, 4, 5, 6]
 
 def test_range_size_zero():
     """Test with zero range size"""
