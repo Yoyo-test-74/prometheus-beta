@@ -27,20 +27,21 @@ def find_pairs_sum_to_target(numbers, target):
     if not isinstance(target, (int, float)):
         raise TypeError("Target must be a number")
     
-    # Use a set to track used numbers and avoid duplicates
-    seen = set()
+    # Use a hash map to track number counts
+    number_counts = {}
     pairs = set()
     
     for num in numbers:
         complement = target - num
         
-        # Check if the complement exists and hasn't been used in this pair
-        if complement in seen and num not in seen:
-            # Sort the pair to ensure unique representation
-            pair = tuple(sorted((complement, num)))
-            pairs.add(pair)
+        # Check if the complement exists and is not the same number or has enough occurrences
+        if complement in number_counts:
+            if num != complement or number_counts[complement] > 1:
+                pair = tuple(sorted((complement, num)))
+                pairs.add(pair)
         
-        seen.add(num)
+        # Update number count
+        number_counts[num] = number_counts.get(num, 0) + 1
     
     # Convert set of pairs to sorted list
     return sorted(list(pairs))
