@@ -23,8 +23,13 @@ def symmetric_difference(list1, list2):
     set1 = set(list1)
     set2 = set(list2)
     
-    # Compute symmetric difference and convert back to a list
+    # Compute symmetric difference 
     sym_diff_set = set1.symmetric_difference(set2)
     
-    # Return as a list, preserving the order of first occurrence
-    return list(dict.fromkeys(list1 + list2 for list1 in sym_diff_set))
+    # Create a result list maintaining the order of first occurrence
+    result = []
+    for item in list1 + list2:
+        if item in sym_diff_set and item not in result:
+            result.append(item)
+    
+    return result
