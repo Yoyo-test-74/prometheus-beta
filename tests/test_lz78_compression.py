@@ -52,7 +52,7 @@ def test_lz78_invalid_compressed_data():
         lz78_decompress([(10, 'a')])
     
     # Invalid tuple type
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         lz78_decompress(["not a tuple"])
 
 def test_lz78_compression_properties():
