@@ -27,5 +27,10 @@ def find_second_highest(sorted_nums):
     if len(unique_nums) < 2:
         return None
     
-    # Return the second highest value
-    return unique_nums[-2]
+    # Determine if the list is in ascending or descending order
+    if sorted_nums[0] < sorted_nums[-1]:
+        # Ascending order
+        return unique_nums[-2]
+    else:
+        # Descending order
+        return unique_nums[1]
