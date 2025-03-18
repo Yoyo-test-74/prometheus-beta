@@ -27,7 +27,7 @@ def test_multiple_whitespaces():
 
 def test_empty_string_raises_error():
     """Test that empty string raises a specific ValueError."""
-    with pytest.raises(ValueError, match="Input sentence cannot be empty"):
+    with pytest.raises(ValueError, match="Input sentence contains no valid words"):
         find_longest_word("")
 
 def test_whitespace_only_raises_error():
