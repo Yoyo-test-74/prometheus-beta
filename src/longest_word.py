@@ -2,14 +2,13 @@ import re
 
 def find_longest_word(sentence):
     """
-    Find the longest word in a given sentence.
+    Find the first longest word in a given sentence based on the ordering in the original sentence.
 
     Args:
         sentence (str): The input sentence to search for the longest word.
 
     Returns:
-        str: The longest word in the sentence. If multiple words have the same 
-             maximum length, returns the first one encountered.
+        str: The first longest word in the sentence based on its original order.
 
     Raises:
         TypeError: If the input is not a string.
@@ -19,17 +18,17 @@ def find_longest_word(sentence):
     if not isinstance(sentence, str):
         raise TypeError("Input must be a string")
     
-    # Use regex to split words, supporting Unicode characters
-    words = re.findall(r'\b[a-zA-Zà-ÿÀ-Ÿ]+\b', sentence)
+    # Split the sentence into words, keeping the original order
+    orig_words = re.findall(r'\b[a-zA-Zà-ÿÀ-Ÿ]+\b', sentence)
     
     # If no words after splitting, raise specific error
-    if not words:
+    if not orig_words:
         raise ValueError("Input sentence contains no valid words")
     
-    # Get max length
-    max_length = len(max(words, key=len))
+    # Find the first longest word of maximum length
+    max_length = len(max(orig_words, key=len))
     
-    # Return the first word of max length
-    for word in words:
+    # Return the first word with max length 
+    for word in orig_words:
         if len(word) == max_length:
             return word
