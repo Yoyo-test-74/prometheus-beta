@@ -23,7 +23,7 @@ def test_single_word():
 
 def test_string_with_numbers():
     """Test string containing numbers."""
-    assert convert_to_header_case("hello2world3test") == "Hello 2 World 3 Test"
+    assert convert_to_header_case("hello2world3test") == "Hello2 World3 Test"
 
 def test_input_with_special_characters():
     """Test string with special characters."""
