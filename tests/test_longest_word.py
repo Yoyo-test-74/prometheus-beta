@@ -26,7 +26,7 @@ def test_multiple_whitespaces():
     assert find_longest_word("  the   quick   brown   fox  ") == "quick"
 
 def test_empty_string_raises_error():
-    """Test that empty string raises a ValueError."""
+    """Test that empty string raises a specific ValueError."""
     with pytest.raises(ValueError, match="Input sentence cannot be empty"):
         find_longest_word("")
 
