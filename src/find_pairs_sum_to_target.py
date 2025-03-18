@@ -27,27 +27,22 @@ def find_pairs_sum_to_target(numbers, target):
     if not isinstance(target, (int, float)):
         raise TypeError("Target must be a number")
     
-    # Use a dictionary to track number indices
-    num_indices = {}
+    # Use a dictionary to track number counts and indices
+    num_counts = {}
     pairs = set()
     
-    for i, num in enumerate(numbers):
+    for num in numbers:
         complement = target - num
         
-        # If complement exists in previous indices
-        if complement in num_indices:
-            # Check all previous indices of the complement
-            for j in num_indices[complement]:
-                # Ensure we're not using the same index
-                # and ensure order to avoid duplicates
-                if j < i:
-                    pair = tuple(sorted((complement, num)))
-                    pairs.add(pair)
+        # Check if complement exists
+        if complement in num_counts:
+            # Ensure the complement and num are different or have enough occurrences
+            if num != complement or num_counts[complement] > 1:
+                pair = tuple(sorted((complement, num)))
+                pairs.add(pair)
         
-        # Track indices for each number
-        if num not in num_indices:
-            num_indices[num] = []
-        num_indices[num].append(i)
+        # Update number count
+        num_counts[num] = num_counts.get(num, 0) + 1
     
     # Convert set of pairs to sorted list
     return sorted(list(pairs))
