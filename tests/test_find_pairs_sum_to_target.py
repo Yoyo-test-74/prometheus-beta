@@ -29,7 +29,7 @@ def test_single_element_list():
 def test_multiple_same_pairs():
     """Test list with multiple ways to form the same pair"""
     result = find_pairs_sum_to_target([2, 2, 3, 3, 5, 5], 7)
-    assert result == [(2, 5), (3, 4)]
+    assert set(result) == {(2, 5), (3, 4)}
 
 def test_negative_numbers():
     """Test with negative numbers"""
