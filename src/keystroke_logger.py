@@ -25,12 +25,20 @@ class KeystrokeLogger:
         self.log_file = log_file or os.path.join(os.getcwd(), 'keystrokes.log')
         self.sensitive_mode = sensitive_mode
         
-        # Configure logging
-        logging.basicConfig(
-            filename=self.log_file, 
-            level=logging.INFO, 
-            format='%(asctime)s - %(message)s'
-        )
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
+        
+        # Configure logging with file handler
+        self.logger = logging.getLogger('KeystrokeLogger')
+        self.logger.setLevel(logging.INFO)
+        
+        # Remove any existing handlers to prevent duplicate logging
+        self.logger.handlers.clear()
+        
+        # Create file handler
+        file_handler = logging.FileHandler(self.log_file, mode='a')
+        file_handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        self.logger.addHandler(file_handler)
     
     def log_keystroke(self, key: str) -> None:
         """
@@ -51,7 +59,7 @@ class KeystrokeLogger:
         
         # Log the keystroke, applying sensitive mode if enabled
         log_message = key if not self.sensitive_mode else '*' * len(key)
-        logging.info(f"Keystroke: {log_message}")
+        self.logger.info(f"Keystroke: {log_message}")
     
     def log_keystrokes(self, keys: List[str]) -> None:
         """
@@ -77,6 +85,6 @@ class KeystrokeLogger:
         """
         try:
             open(self.log_file, 'w').close()
-            logging.info("Log file cleared")
+            self.logger.info("Log file cleared")
         except IOError as e:
-            logging.error(f"Failed to clear log file: {e}")
+            self.logger.error(f"Failed to clear log file: {e}")
