@@ -38,7 +38,7 @@ def reverse_substring_vowels(s: str, start: int, end: int) -> str:
         return s
     
     # Collect the vowels to be used for replacement
-    replacement_vowels = [chars[pos] for pos in vowel_positions][::-1]
+    replacement_vowels = [chars[pos] for pos in reversed(vowel_positions)]
     
     # Create a result list to modify
     result = chars.copy()
