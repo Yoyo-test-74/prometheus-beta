@@ -30,14 +30,17 @@ def reverse_substring_vowels(s: str, start: int, end: int) -> str:
     # Convert string to list for easier manipulation
     chars = list(s)
     
-    # Extract vowels from the substring in order
+    # Extract vowels from the substring
     substring_vowels = [char for char in chars[start:end] if char in vowels]
     
     # If no vowels, return original string
     if not substring_vowels:
         return s
     
-    # Initialize the vowel index from the end to replace vowels in order
+    # Reverse the vowels list
+    substring_vowels = substring_vowels[::-1]
+    
+    # Initialize the vowel index
     vowel_index = 0
     
     # Create a new list to modify
@@ -46,7 +49,7 @@ def reverse_substring_vowels(s: str, start: int, end: int) -> str:
     # Replace vowels in the substring
     for i in range(start, end):
         if chars[i] in vowels:
-            result[i] = substring_vowels[len(substring_vowels) - 1 - vowel_index]
+            result[i] = substring_vowels[vowel_index]
             vowel_index += 1
     
     return ''.join(result)
